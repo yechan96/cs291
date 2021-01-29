@@ -186,22 +186,34 @@ function createDrinkingBird() {
 	//   THREE.SphereGeometry( XX, 32, 16 ) for the tessellation.
 	//   Each sphere should have radius of 10 and be moved to X=-48, Y=560,
 	//   then rotated 20 degrees left and right to make a pair.
-	var eyeRight = new THREE.Object3D();
-	var eyeLeft = new THREE.Object3D();
-	for (var i = 0; i<2; i++){
-		var eye = new THREE.Mesh(new THREE.SphereGeometry(10,32,16), eyeMaterial);
-		eye.position.x = -48;
-		eye.position.y = 560;
-		if(i==0){
-			eyeRight.add(eye);
-			eyeRight.rotation.y = -20*Math.PI/180;
-			scene.add(eyeRight);
-		}else{
-			eyeLeft.add(eye);
-			eyeLeft.rotation.y = 20*Math.PI/180;
-			scene.add(eyeLeft);
-		}
-	}
+	// var eyeRight = new THREE.Object3D();
+	// var eyeLeft = new THREE.Object3D();
+	// for (var i = 0; i<2; i++){
+	// 	var eye = new THREE.Mesh(new THREE.SphereGeometry(10,32,16), eyeMaterial);
+	// 	eye.position.x = -48;
+	// 	eye.position.y = 560;
+	// 	if(i==0){
+	// 		eyeRight.add(eye);
+	// 		eyeRight.rotation.y = -20*Math.PI/180;
+	// 		scene.add(eyeRight);
+	// 	}else{
+	// 		eyeLeft.add(eye);
+	// 		eyeLeft.rotation.y = 20*Math.PI/180;
+	// 		scene.add(eyeLeft);
+	// 	}
+	// }
+	var eyeSphere = new THREE.Mesh(new THREE.SphereGeometry(10,32,16), eyeMaterial);
+	eyeSphere.position.set(-48,560);
+
+	var eye = new THREE.Object3D();
+	eye.add(eyeSphere);
+	eye.rotation.y = -20*Math.PI/180;
+	scene.add(eye);
+	
+	eye = new THREE.Object3D();
+	eye.add(eyeSphere);
+	eye.rotation.y = 20*Math.PI/180;
+	scene.add(eye);
 
 }
 

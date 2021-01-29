@@ -256,6 +256,10 @@ function animate() {
 function render() {
 	var delta = clock.getDelta();
 	cameraControls.update(delta);
+	light.position.y = Math.sin(effectController.altitude*Math.PI/180);
+	var length = Math.sqrt(1 - light.position.y*light.position.y);
+	light.position.x = length*Math.cos(effectController.azimuth*Math.PI/180);
+	light.position.z = length*Math.sin(effectController.azimuth*Math.PI/180);
 	renderer.render(scene, camera);
 }
 
