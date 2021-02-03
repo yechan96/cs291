@@ -39,6 +39,7 @@ function init() {
 	cameraControls = new THREE.OrbitAndPanControls(camera, renderer.domElement);
 
 	// Student: set the target for the camera.
+	cameraControls.target.set(-2800,360,-1600);
 	// The last known position of the drinking bird is x: -2800, y: 360, z: -1600
 }
 

@@ -292,20 +292,25 @@ function render() {
 	cameraControls.update(delta);
 
 	renderer.enableScissorTest( false );
-	renderer.setViewport( 0, 0, canvasWidth, canvasHeight );
+	renderer.setViewport( 0, 0, 2*canvasWidth, 2*canvasHeight );
 	renderer.clear();
 	renderer.render( scene, camera );
 
 	// Student: set rearCam so it's pointing in the opposite direction than the camera
+	rearCam.position.copy(camera.position);
+	rearTarget.copy(camera.position);
+	rearTarget.sub(cameraControls.target);
+	rearTarget.add(camera.position);
+	rearCam.lookAt(rearTarget);
 
 	// rearview render
 	renderer.enableScissorTest( true );
 	// setScissor could be set just once in this particular case,
 	// since it never changes, and then just enabled/disabled
-	renderer.setScissor( 0.75 * canvasWidth, 0.75 * canvasHeight,
-		0.25 * canvasWidth, 0.25 * canvasHeight );
-	renderer.setViewport( 0.75 * canvasWidth, 0.75 * canvasHeight,
-		0.25 * canvasWidth, 0.25 * canvasHeight );
+	renderer.setScissor( 1.5 * canvasWidth, 1.5 * canvasHeight,
+		0.5 * canvasWidth, 0.5 * canvasHeight );
+	renderer.setViewport( 1.5 * canvasWidth, 1.5 * canvasHeight,
+		0.5 * canvasWidth, 0.5 * canvasHeight );
 	renderer.clear();
 	renderer.render( scene, rearCam );
 }
