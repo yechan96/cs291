@@ -22,9 +22,11 @@ void main() {
 	// Student: modify position. You'll need to copy it to a
 	// temporary vector and modify the temporary. 
 	// Don't forget to use this temporary in the rest of the shader.
-	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+	vec3 vTempPosition = position;
+	vTempPosition.z = sqrt((uSphereRadius2-pow(vTempPosition.x,2.0)-pow(vTempPosition.y,2.0)))-sqrt(uSphereRadius2);
+	gl_Position = projectionMatrix * modelViewMatrix * vec4( vTempPosition, 1.0 );
 	vNormal = normalize( normalMatrix * normal );
-	vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+	vec4 mvPosition = modelViewMatrix * vec4( vTempPosition, 1.0 );
 	vViewPosition = -mvPosition.xyz;
 }
 		</script>
